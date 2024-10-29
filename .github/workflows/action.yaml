@@ -9,10 +9,10 @@ on:
       - master
 
 
-permissions:
-  contents: write
-  pull-requests: write
-  deployments: write
+#permissions:
+#  contents: write
+#  pull-requests: write
+#  deployments: write
 
 
 jobs:
@@ -28,6 +28,9 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
 
       - name: Build and Test
         run: ./gradlew test
