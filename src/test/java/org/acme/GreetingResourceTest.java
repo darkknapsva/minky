@@ -1,20 +1,25 @@
 package org.acme;
 
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.startsWith;
 
 @QuarkusTest
 class GreetingResourceTest {
     @Test
-    void testHelloEndpoint() {
-        given()
-          .when().get("/hello")
-          .then()
-             .statusCode(200)
-             .body(is("Hello RESTEasy"));
+    void testNumberResource() {
+
+        RestAssured.given()
+                .when().get("/api/numbers")
+                .then()
+                    .statusCode(200)
+                    .contentType("application/json")
+                .body("isbn_13", startsWith("13-"));
+
+
     }
 
 }
